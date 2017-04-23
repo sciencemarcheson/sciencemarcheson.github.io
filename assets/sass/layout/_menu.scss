@@ -1,8 +1,8 @@
-///
-/// Solid State by Pixelarity
-/// pixelarity.com | hello@pixelarity.com
-/// License: pixelarity.com/license
-///
+/*
+	Atmosphere by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+*/
 
 /* Menu */
 
@@ -21,7 +21,7 @@
 		-ms-user-select: none;
 		user-select: none;
 		-webkit-tap-highlight-color: rgba(0,0,0,0);
-		background: transparentize(_palette(bg), 0.2);
+		background-color: transparentize(desaturate(darken(_palette(bg-alt), 10), 5), 0.1);
 		cursor: default;
 		height: 100%;
 		left: 0;
@@ -31,33 +31,35 @@
 		top: 0;
 		visibility: hidden;
 		width: 100%;
+		padding: 1.5em;
+		z-index: _misc(z-index-base) + 2;
 
 		.inner {
 			@include padding(2.5em, 1.5em);
 			@include vendor('transform', 'translateY(0.5em)');
 			@include vendor('transition', ('opacity #{_duration(menu)} ease','transform #{_duration(menu)} ease'));
 			-webkit-overflow-scrolling: touch;
-			background: _palette(accent);
+			background: _palette(accent1, bg);
 			border-radius: _size(border-radius);
+			color: _palette(accent1, fg);
 			display: block;
 			max-width: 100%;
 			opacity: 0;
 			position: relative;
-			width: 18em;
+			text-transform: uppercase;
+			width: 24em;
 		}
 
 		h2 {
-			border-bottom: solid 2px _palette(border);
+			color: inherit;
+			border-bottom: solid 2px _palette(accent1, border);
 			padding-bottom: 1em;
 		}
 
 		.close {
-			background-image: url('images/close.svg');
-			background-position: 75% 25%;
-			background-repeat: no-repeat;
-			background-size: 2em 2em;
-			border: 0;
+			@include icon;
 			content: '';
+			cursor: pointer;
 			display: block;
 			height: 4em;
 			overflow: hidden;
@@ -67,6 +69,20 @@
 			text-indent: 4em;
 			top: 0;
 			width: 4em;
+			color: _palette(accent1, fg-bold);
+
+			&:before {
+				content: '\f00d';
+				position: absolute;
+				top: 0.75em;
+				right: 0.75em;
+				font-size: 1.25em;
+				width: 1em;
+				height: 1em;
+				line-height: 1em;
+				display: block;
+				text-indent: 0;
+			}
 		}
 
 		.links {
@@ -78,19 +94,19 @@
 				padding: 0;
 
 				a {
+					background-color: transparent;
 					border-radius: _size(border-radius);
 					border: 0;
+					color: inherit;
 					display: block;
-					font-family: _font(family-heading);
-					font-size: 0.8em;
-					font-weight: _font(weight-heading);
-					letter-spacing: _font(kern-heading);
+					font-weight: _font(weight);
 					line-height: 1.85em;
 					padding: 0.75em 0;
-					text-transform: uppercase;
+					text-decoration: none;
 
 					&:hover {
-						background: saturate(darken(_palette(accent), 3), 1.5);
+						color: _palette(accent1, bg);
+						background-color: _palette(accent1, fg-bold);
 					}
 				}
 			}

@@ -1,8 +1,8 @@
-///
-/// Solid State by Pixelarity
-/// pixelarity.com | hello@pixelarity.com
-/// License: pixelarity.com/license
-///
+/*
+	Atmosphere by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+*/
 
 /* Form */
 
@@ -10,46 +10,47 @@
 		margin: 0 0 _size(element-margin) 0;
 
 		.field {
-			margin: 0 0 _size(element-margin) 0;
+			margin-bottom: 1.5em;
 
-			label {
-				margin-top: _size(element-margin) * -0.75;
-			}
+			&.half {
+				display: inline-block;
+				width: 48%;
 
-			&:first-child {
-				label {
-					margin-top: 0;
+				&.first {
+					margin-right: 3%;
 				}
 			}
 		}
 
-		> :last-child {
-			margin-bottom: 0;
+		@include breakpoint(medium) {
+			.field {
+				&.half {
+					display: block;
+					width: 100%;
+
+					&.first {
+						margin-right: 0;
+					}
+				}
+			}
 		}
 	}
 
 	label {
-		color: _palette(fg-bold);
 		display: block;
-		font-family: _font(family-heading);
-		font-size: 0.8em;
-		font-weight: _font(weight-heading-bold);
-		letter-spacing: _font(kern-heading);
-		margin: 0 0 (_size(element-margin) * 0.35) 0;
-		text-transform: uppercase;
+		font-size: 0.9em;
+		font-weight: _font(weight-bold);
+		margin: 0 0 (_size(element-margin) * 0.5) 0;
 	}
 
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
-	input[type="tel"],
 	select,
 	textarea {
 		@include vendor('appearance', 'none');
-		background: _palette(border-bg);
-		border-radius: _size(border-radius);
 		border: none;
-		border: solid 2px _palette(border);
+		border: solid _size(border-width);
 		color: inherit;
 		display: block;
 		outline: 0;
@@ -60,10 +61,6 @@
 		&:invalid {
 			box-shadow: none;
 		}
-
-		&:focus {
-			border-color: desaturate(lighten(_palette(accent), 6), 3);
-		}
 	}
 
 	.select-wrapper {
@@ -72,7 +69,6 @@
 		position: relative;
 
 		&:before {
-			color: _palette(border);
 			content: '\f078';
 			display: block;
 			height: _size(element-height);
@@ -87,13 +83,6 @@
 
 		select::-ms-expand {
 			display: none;
-		}
-	}
-
-	select {
-		option {
-			color: _palette(fg-bold);
-			background: _palette(bg);
 		}
 	}
 
@@ -120,22 +109,17 @@
 
 		& + label {
 			@include icon;
-			color: _palette(fg);
 			cursor: pointer;
 			display: inline-block;
 			font-size: 1em;
-			font-family: _font(family);
-			text-transform: none;
-			letter-spacing: 0;
 			font-weight: _font(weight);
 			padding-left: (_size(element-height) * 0.6) + 0.75em;
 			padding-right: 0.75em;
 			position: relative;
 
 			&:before {
-				background: _palette(border-bg);
 				border-radius: _size(border-radius);
-				border: solid 2px _palette(border);
+				border: solid _size(border-width);
 				content: '';
 				display: inline-block;
 				height: (_size(element-height) * 0.6);
@@ -150,16 +134,7 @@
 
 		&:checked + label {
 			&:before {
-				background: _palette(fg-bold);
-				border-color: _palette(fg-bold);
 				content: '\f00c';
-				color: _palette(bg);
-			}
-		}
-
-		&:focus + label {
-			&:before {
-				border-color: _palette(accent);
 			}
 		}
 	}
@@ -181,26 +156,117 @@
 	}
 
 	::-webkit-input-placeholder {
-		color: _palette(fg-light) !important;
 		opacity: 1.0;
 	}
 
 	:-moz-placeholder {
-		color: _palette(fg-light) !important;
 		opacity: 1.0;
 	}
 
 	::-moz-placeholder {
-		color: _palette(fg-light) !important;
 		opacity: 1.0;
 	}
 
 	:-ms-input-placeholder {
-		color: _palette(fg-light) !important;
 		opacity: 1.0;
 	}
 
-	.polyfill-placeholder {
-		color: _palette(fg-light) !important;
+	.formerize-placeholder {
 		opacity: 1.0;
 	}
+
+	@mixin color-form($p: null) {
+		$highlight: _palette($p, highlight);
+
+		label {
+			color: _palette($p, fg-bold);
+		}
+
+		input[type="text"],
+		input[type="password"],
+		input[type="email"],
+		select,
+		textarea {
+			background: _palette($p, border2-bg);
+			border-color: transparent;
+
+			&:focus {
+				@if $p == $highlight {
+					border-color: _palette($p, fg-bold);
+					box-shadow: 0 0 0 _size(border-width) _palette($p, fg-bold);
+				}
+				@else {
+					border-color: _palette(accent1, bg);
+					box-shadow: 0 0 0 _size(border-width) _palette(accent1, bg);
+				}
+			}
+		}
+
+		.select-wrapper {
+			&:before {
+				color: _palette($p, border);
+			}
+		}
+
+		input[type="checkbox"],
+		input[type="radio"], {
+			& + label {
+				color: _palette($p, fg);
+
+				&:before {
+					background: _palette($p, border2-bg);
+					border-color: _palette($p, border);
+				}
+			}
+
+			&:checked + label {
+				&:before {
+					@if $p == $highlight {
+						background-color: _palette($p, fg-bold);
+						border-color: _palette($p, fg-bold);
+						color: _palette($p, bg);
+					}
+					@else {
+						background-color: _palette(accent1, bg);
+						border-color: _palette(accent1, bg);
+						color: _palette(accent1, fg-bold);
+					}
+				}
+			}
+
+			&:focus + label {
+				&:before {
+					@if $p == $highlight {
+						border-color: _palette($p, fg-bold);
+						box-shadow: 0 0 0 _size(border-width) _palette($p, fg-bold);
+					}
+					@else {
+						border-color: _palette(accent1, bg);
+						box-shadow: 0 0 0 _size(border-width) _palette(accent1, bg);
+					}
+				}
+			}
+		}
+
+		::-webkit-input-placeholder {
+			color: _palette($p, fg-light) !important;
+		}
+
+		:-moz-placeholder {
+			color: _palette($p, fg-light) !important;
+		}
+
+		::-moz-placeholder {
+			color: _palette($p, fg-light) !important;
+		}
+
+		:-ms-input-placeholder {
+			color: _palette($p, fg-light) !important;
+		}
+
+		.formerize-placeholder {
+			color: _palette($p, fg-light) !important;
+		}
+	}
+
+	@include color-form;

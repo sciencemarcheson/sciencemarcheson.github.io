@@ -1,0 +1,68 @@
+/*
+	Atmosphere by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+*/
+
+/* Posts */
+
+	.posts {
+		margin-bottom: (_size(element-margin) * 2);
+
+		article {
+			@include vendor('display', 'flex');
+			@include vendor('align-items', 'center');
+			margin-bottom: _size(element-margin);
+			width: 100%;
+
+			.content {
+				-ms-flex: 1;
+			}
+
+			.image {
+				@include vendor('order', '99');
+				margin: 0 0 _size(element-margin) _size(element-margin);
+			}
+
+			&.alt {
+				.image {
+					@include vendor('order', '-1');
+					margin: 0 _size(element-margin) _size(element-margin) 0;
+				}
+			}
+		}
+
+		@include breakpoint(large) {
+			.content {
+				@include vendor('flex-shrink', '0');
+				width: 33%;
+			}
+
+			.image {
+				img {
+					max-width: 100%;
+				}
+			}
+		}
+
+		@include breakpoint(medium) {
+			article {
+				@include vendor('flex-wrap', 'wrap');
+
+				.content {
+					width: 100%;
+				}
+
+				.image {
+					@include vendor('order', '-1');
+					margin-left: 0;
+					margin-right: 0;
+					width: 100%;
+				}
+			}
+		}
+
+		@include breakpoint(small) {
+			margin-bottom: _size(element-margin);
+		}
+	}

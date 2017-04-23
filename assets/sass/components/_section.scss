@@ -1,8 +1,8 @@
-///
-/// Solid State by Pixelarity
-/// pixelarity.com | hello@pixelarity.com
-/// License: pixelarity.com/license
-///
+/*
+	Atmosphere by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+*/
 
 /* Section/Article */
 
@@ -11,3 +11,104 @@
 			text-align: center;
 		}
 	}
+
+	header {
+		p {
+			position: relative;
+			margin: 0 0 (_size(element-margin) * 0.75) 0;
+		}
+
+		h2 + p {
+			font-size: 1.25em;
+			margin-top: (_size(element-margin) * -0.5);
+		}
+
+		h3 + p {
+			font-size: 1.1em;
+			margin-top: (_size(element-margin) * -0.4);
+		}
+
+		h4 + p,
+		h5 + p,
+		h6 + p {
+			font-size: 0.9em;
+			margin-top: (_size(element-margin) * -0.3);
+		}
+
+		&.major {
+			margin-bottom: (_size(element-margin) * 1.35);
+			padding-bottom: (_size(element-margin) * 1.35);
+			position: relative;
+
+			h1, h2, h3 {
+				margin-bottom: 0;
+			}
+
+			p {
+				font-weight: _font(weight-bold);
+				margin-bottom: 0.25em;
+				text-transform: uppercase;
+			}
+
+			&:after {
+				bottom: 0;
+				content: '';
+				height: 1px;
+				left: 0;
+				position: absolute;
+				width: 7em;
+			}
+
+			&.alt {
+				margin-bottom: 0;
+			}
+		}
+
+		@include breakpoint(large) {
+			&.major {
+				&.alt {
+					margin-bottom: (_size(element-margin) * 1.35);
+				}
+			}
+		}
+
+		@include breakpoint(small) {
+			&.major {
+				margin-bottom: (_size(element-margin) * 0.9);
+				padding-bottom: (_size(element-margin) * 0.65);
+
+				&.alt {
+					margin-bottom: (_size(element-margin) * 0.9);
+				}
+			}
+		}
+	}
+
+	@mixin color-section($p: null) {
+		$highlight: _palette($p, highlight);
+
+		header {
+			p {
+				color: _palette($p, fg-light);
+			}
+
+			&.major {
+				@if $p == $highlight {
+					p {
+						color: _palette($p, fg-bold);
+					}
+				}
+				@else {
+					p {
+						color: _palette($highlight, bg);
+					}
+				}
+
+				&:after {
+					background-color: _palette($p, border);
+				}
+			}
+		}
+	}
+
+	@include color-section;

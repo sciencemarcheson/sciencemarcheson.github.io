@@ -1,0 +1,81 @@
+/*
+	Atmosphere by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+*/
+
+/* Spotlights */
+
+	.spotlights {
+		@include vendor('display', 'flex');
+		@include vendor('flex-wrap', 'wrap');
+		@include vendor('justify-content', 'center');
+		margin-bottom: (_size(element-margin) * 2);
+
+		article {
+			@include padding(3.5em, 4em);
+			box-shadow: 0 1em 5em rgba(#000, 0.05);
+			margin-bottom: (_size(element-margin) * 1.5);
+			width: 48%;
+
+			&:nth-child(even) {
+				margin-left: 4%;
+			}
+
+			header.major {
+				&:after {
+					margin-left: -4em;
+				}
+			}
+		}
+
+		@include breakpoint(medium) {
+			article {
+				@include padding(2em, 2em);
+				width: 100%;
+
+				&:nth-child(even) {
+					margin-left: 0;
+				}
+
+				header.major {
+					&:after {
+						margin-left: -2em;
+					}
+				}
+			}
+		}
+
+		@include breakpoint(small) {
+			margin-bottom: _size(element-margin);
+		}
+
+		@include breakpoint(xsmall) {
+			article {
+				@include padding(1.5em, 1.5em);
+
+				header.major {
+					&:after {
+						margin-left: -1.5em;
+					}
+				}
+			}
+		}
+	}
+
+	@mixin color-spotlights($p: null) {
+		$highlight: _palette($p, highlight);
+
+		.spotlights {
+			article {
+				@if $p == $highlight {
+					background-color: _palette($p, border-bg);
+				}
+				@else {
+					background-color: _palette($highlight, fg-bold);
+				}
+			}
+		}
+	}
+
+	@include color-spotlights;

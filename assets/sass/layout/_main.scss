@@ -4,14 +4,12 @@
 	License: pixelarity.com/license
 */
 
-/* Icon */
+/* Main */
 
-	.icon {
-		@include icon;
-		border-bottom: none;
-		position: relative;
+	#main {
+		padding: 10em 0 4em;
 
-		> .label {
-			display: none;
+		@include breakpoint(small) {
+			padding: 5em 0 2em;
 		}
 	}

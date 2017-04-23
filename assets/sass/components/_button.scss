@@ -1,8 +1,8 @@
-///
-/// Solid State by Pixelarity
-/// pixelarity.com | hello@pixelarity.com
-/// License: pixelarity.com/license
-///
+/*
+	Atmosphere by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+*/
 
 /* Button */
 
@@ -12,57 +12,26 @@
 	button,
 	.button {
 		@include vendor('appearance', 'none');
-		@include vendor('transition', 'background-color #{_duration(transition)} ease-in-out');
-		background-color: transparent;
+		@include vendor('transition', 'background-color #{_duration(transition)} ease-in-out, color #{_duration(transition)} ease-in-out');
 		border-radius: _size(border-radius);
 		border: 0;
-		box-shadow: inset 0 0 0 2px _palette(border);
-		color: _palette(fg-bold) !important;
 		cursor: pointer;
 		display: inline-block;
-		font-family: _font(family-heading);
 		font-size: 0.8em;
-		font-weight: _font(weight-heading-bold);
-		height: 3.75em;
-		letter-spacing: _font(kern-heading);
-		line-height: 3.75em;
+		font-weight: _font(weight-bold);
+		height: 3.5em;
+		line-height: 3.5em;
 		padding: 0 2.25em;
 		text-align: center;
 		text-decoration: none;
 		text-transform: uppercase;
 		white-space: nowrap;
 
-		&:hover {
-			background-color: _palette(border-bg);
-		}
-
-		&:active {
-			background-color: _palette(border2-bg);
-		}
-
 		&.icon {
+			padding-left: 1.35em;
+
 			&:before {
 				margin-right: 0.5em;
-				color: _palette(fg-light);
-			}
-		}
-
-		&.special {
-			background-color: _palette(accent);
-			box-shadow: none;
-
-			&:hover {
-				background-color: desaturate(lighten(_palette(accent), 3), 1.5);
-			}
-
-			&:active {
-				background-color: saturate(darken(_palette(accent), 3), 1.5);
-			}
-
-			&.icon {
-				&:before {
-					color: mix(_palette(fg-bold), _palette(accent), 25%);
-				}
 			}
 		}
 
@@ -77,11 +46,12 @@
 		}
 
 		&.big {
-			font-size: 1em;
+			font-size: 0.95em;
 		}
 
 		&.disabled,
 		&:disabled {
+			@include vendor('pointer-events', 'none');
 			opacity: 0.25;
 		}
 
@@ -89,3 +59,66 @@
 			padding: 0;
 		}
 	}
+
+	@mixin color-button($p: null) {
+		$highlight: _palette($p, highlight);
+
+		input[type="submit"],
+		input[type="reset"],
+		input[type="button"],
+		button,
+		.button {
+			background-color: transparent;
+			box-shadow: inset 0 0 0 _size(border-width) _palette($p, border);
+			color: _palette($p, fg-bold) !important;
+
+			&:hover, &:focus {
+				background-color: _palette($p, border-bg);
+			}
+
+			&:active {
+				background-color: opacify(_palette($p, border-bg), 0.1);
+			}
+
+			&.icon {
+				&:before {
+					color: _palette($p, fg-light);
+				}
+			}
+
+			&.special {
+				box-shadow: none;
+
+				@if $p == $highlight {
+					background-color: _palette($p, fg-bold);
+					color: _palette($p, bg) !important;
+
+					&.icon {
+						&:before {
+							color: _palette($p, bg) !important;
+						}
+					}
+				}
+				@else {
+					background-color: _palette($highlight, bg);
+					color: _palette($highlight, fg-bold) !important;
+
+					&.icon {
+						&:before {
+							color: _palette($highlight, fg-bold) !important;
+						}
+					}
+
+					&:hover, &:focus {
+						background-color: lighten(_palette($highlight, bg), 5);
+					}
+
+					&:active {
+						background-color: darken(_palette($highlight, bg), 5);
+					}
+				}
+			}
+		}
+	}
+
+	@include color-button;

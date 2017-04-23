@@ -1,8 +1,8 @@
-///
-/// Solid State by Pixelarity
-/// pixelarity.com | hello@pixelarity.com
-/// License: pixelarity.com/license
-///
+/*
+	Atmosphere by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+*/
 
 /* Basic */
 
@@ -24,19 +24,7 @@
 		}
 
 	body {
-		background-color:		_palette(bg);
-
-		background-image:		linear-gradient(to top, transparentize(_palette(bg), 0.2), transparentize(_palette(bg), 0.2)),
-								url('../../images/bg.jpg');
-
-		background-size:		auto,
-								cover;
-
-		background-attachment:	fixed,
-								fixed;
-
-		background-position:	center,
-								center;
+		background: _palette(bg);
 
 		// Prevents animation/transition "flicker" on page load.
 		// Automatically added/removed by js/main.js.

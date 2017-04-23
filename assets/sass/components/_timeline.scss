@@ -1,0 +1,109 @@
+/*
+	Atmosphere by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+*/
+
+/* Timeline */
+
+	.timeline {
+		> section {
+			@include vendor('display', 'flex');
+			border-left: solid _size(border-width);
+			position: relative;
+
+			&:before {
+				position: absolute;
+				content: '';
+				border-radius: 100%;
+				width: 1em;
+				height: 1em;
+				left: -0.5em;
+				top: 0;
+			}
+
+			&:last-child {
+				border-left: 0;
+			}
+		}
+
+		header {
+			@include vendor('flex-shrink', '0');
+			margin-bottom: _size(element-margin);
+			padding: 0 2.5em;
+			width: 25%;
+
+			h4 {
+				font-weight: _font(weight-bold);
+				text-transform: uppercase;
+			}
+
+			p {
+				margin-bottom: 0.5em;
+				font-weight: _font(weight-bold);
+			}
+		}
+
+		.image {
+			margin-bottom: _size(element-margin);
+			margin-right: 2.5em;
+		}
+
+		.content {
+			margin-bottom: _size(element-margin);
+			-ms-flex: 1;
+
+			p {
+				margin-bottom: (_size(element-margin) * 0.5);
+			}
+		}
+
+		@include breakpoint(medium) {
+			> section {
+				@include vendor('flex-wrap', 'wrap');
+				padding-left: 2em;
+			}
+
+			header {
+				margin-bottom: 1em;
+				padding: 0;
+				width: 100%;
+			}
+		}
+
+		@include breakpoint(xsmall) {
+			> section {
+				padding-left: 1.5em;
+			}
+		}
+	}
+
+	@mixin color-timeline($p: null) {
+		$highlight: _palette($p, highlight);
+
+		.timeline {
+
+			> section {
+				border-color: _palette($p, fg-light);
+
+				&:before {
+					background-color: _palette($p, fg-light);
+				}
+			}
+
+			header {
+				@if $p == $highlight {
+					p {
+						color: _palette($p, fg-bold);
+					}
+				}
+				@else {
+					p {
+						color: _palette($highlight, bg);
+					}
+				}
+			}
+		}
+	}
+
+	@include color-timeline;

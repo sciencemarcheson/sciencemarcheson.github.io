@@ -1,19 +1,18 @@
 /*
-	Solid State by Pixelarity
+	Atmosphere by Pixelarity
 	pixelarity.com | hello@pixelarity.com
 	License: pixelarity.com/license
 */
 
 (function($) {
 
-	"use strict";
-
 	skel.breakpoints({
 		xlarge:	'(max-width: 1680px)',
-		large:	'(max-width: 1280px)',
-		medium:	'(max-width: 980px)',
-		small:	'(max-width: 736px)',
-		xsmall:	'(max-width: 480px)'
+		large: '(max-width: 1280px)',
+		medium: '(max-width: 980px)',
+		small: '(max-width: 736px)',
+		xsmall: '(max-width: 480px)',
+		xxsmall: '(max-width: 360px)'
 	});
 
 	$(function() {
@@ -41,6 +40,13 @@
 					'.important\\28 medium\\29',
 					skel.breakpoint('medium').active
 				);
+			});
+
+		// Scrolly.
+			$('.scrolly').scrolly({
+				offset: function() {
+					return $header.height();
+				}
 			});
 
 		// Header.
@@ -160,6 +166,7 @@
 							$menu._hide();
 
 				});
+
 
 	});
 

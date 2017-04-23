@@ -1,19 +1,17 @@
-///
-/// Solid State by Pixelarity
-/// pixelarity.com | hello@pixelarity.com
-/// License: pixelarity.com/license
-///
+/*
+	Atmosphere by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+*/
 
 /* Image */
 
 	.image {
-		border-radius: _size(border-radius);
 		border: 0;
 		display: inline-block;
 		position: relative;
 
 		img {
-			border-radius: _size(border-radius);
 			display: block;
 		}
 
@@ -28,13 +26,13 @@
 
 		&.left {
 			float: left;
-			padding: 0 1.5em 1em 0;
+			margin: 0 1.5em 1em 0;
 			top: 0.25em;
 		}
 
 		&.right {
 			float: right;
-			padding: 0 0 1em 1.5em;
+			margin: 0 0 1em 1.5em;
 			top: 0.25em;
 		}
 
@@ -55,6 +53,12 @@
 
 			img {
 				width: 100%;
+			}
+		}
+
+		@include breakpoint(small) {
+			&.main {
+				margin: 0 0 _size(element-margin) 0;
 			}
 		}
 	}

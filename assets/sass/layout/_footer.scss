@@ -1,142 +1,174 @@
-///
-/// Solid State by Pixelarity
-/// pixelarity.com | hello@pixelarity.com
-/// License: pixelarity.com/license
-///
+/*
+	Atmosphere by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+*/
 
 /* Footer */
 
 	#footer {
-		.inner {
-			@include padding(5em, 0);
+		@include vendor('background-image', (
+			'linear-gradient(to top, #{transparentize(_palette(bg-alt), 0.1)}, #{transparentize(_palette(bg-alt), 0.1)})',
+			'url("../../images/banner.jpg")'
+		));
+		background-attachment: fixed;
+		background-position: center center;
+		background-size: cover;
+		padding: 12em 0 2em;
+
+		> .inner {
 			@include vendor('display', 'flex');
-			@include vendor('flex-direction', 'row');
-			@include vendor('flex-wrap', 'wrap');
-			margin: 0 auto;
-			width: _size(inner);
+			margin: 0 auto (_size(element-margin) * 1.5);
+			max-width: 75em;
+			width: calc(100% - 4em);
+		}
 
-			> * {
-				width: 100%;
+		.contact {
+			@include padding(4em, 2.5em);
+			background-color: #fff;
+			list-style-type: none;
+			margin-bottom: 0;
+			width: 35%;
+
+			li {
+				margin-bottom: _size(element-margin);
+				padding-bottom: _size(element-margin);
+				padding-left: 4em;
+				position: relative;
+
+				strong {
+					color: _palette(accent1, bg);
+					display: block;
+					margin-bottom: 0.5em;
+					text-transform: uppercase;
+				}
+
+				&.icon:before {
+					color: _palette(border);
+					position: absolute;
+					left: 0;
+					top: -0.15em;
+					font-size: 1.5em;
+				}
+
+				&:after {
+					background-color: _palette(border);
+					bottom: 0;
+					content: '';
+					height: 1px;
+					left: -4em;
+					position: absolute;
+					width: 8em;
+				}
+
+				&:last-child {
+					margin-bottom: 0;
+
+					&:after {
+						display: none;
+					}
+				}
+			}
+		}
+
+		form {
+			@include color(accent1);
+			@include padding(4em, 3.5em);
+			@include vendor('flex-grow', '1');
+			margin-bottom: 0;
+
+			h4 {
+				font-weight: _font(weight-bold);
+				margin-bottom: _size(element-margin);
+				text-transform: uppercase;
 			}
 
-			form {
-				margin: 0 _size(section-spacing, large) 0 0;
-				width: calc(50% - #{_size(section-spacing, large) * 0.5});
+			label {
+				@include sr-only;
 			}
+		}
 
-			.contact {
-				width: calc(50% - #{_size(section-spacing, large) * 0.5});
-			}
+		.copyright {
+			color: _palette(fg-light);
+			margin-bottom: (_size(element-margin) * 1.5);
+			padding: 0;
+			text-align: center;
 
-			.copyright {
-				border-top: solid 2px _palette(border);
+			li {
+				border-left: solid _size(border-width) _palette(border);
+				display: inline-block;
 				list-style: none;
-				margin: (_size(element-margin) * 2) 0 _size(element-margin) 0;
-				padding: _size(element-margin) 0 0 0;
-				width: 100%;
+				margin-left: 1.5em;
+				padding-left: 1.5em;
 
-				li {
-					border-left: solid 2px _palette(border);
-					color: _palette(fg-light);
-					display: inline-block;
-					font-size: 0.9em;
-					line-height: 1;
-					margin-left: 1em;
-					padding: 0;
-					padding-left: 1em;
-
-					&:first-child {
-						border-left: 0;
-						margin-left: 0;
-						padding-left: 0;
-					}
-
-					a {
-						color: inherit;
-					}
+				&:first-child {
+					border-left: 0;
+					margin-left: 0;
+					padding-left: 0;
 				}
 			}
 		}
 
 		@include breakpoint(large) {
-
-			background-color:		_palette(bg);
-
-			background-image:		linear-gradient(to top, transparentize(_palette(bg), 0.2), transparentize(_palette(bg), 0.2)),
-									url('../../images/bg.jpg');
-
-			background-size:		auto,
-									cover;
-
-			background-position:	center,
-									center;
-
-		 	margin-top: (_size(wrapper-edges, large) * -1);
-		 	padding-top: _size(wrapper-edges, large);
-
+			background-attachment: scroll;
 		}
 
 		@include breakpoint(medium) {
-		 	margin-top: (_size(wrapper-edges, medium) * -1);
-		 	padding-top: _size(wrapper-edges, medium);
+			padding-top: 10em;
 
-			.inner {
-				@include padding(3em, 3em);
-				display: block;
-				width: 100%;
+			.contact {
+				@include padding(2em, 2em);
+				width: 45%;
 
-				form {
-					width: 100%;
-					margin: 0 0 (_size(element-margin) * 2) 0;
+				li {
+					padding-left: 3em;
 				}
+			}
 
-				.contact {
-					width: 100%;
-					margin: 0 0 (_size(element-margin) * 2) 0;
-				}
-
-				.copyright {
-					margin: (_size(element-margin) * 2) 0 _size(element-margin) 0;
-				}
+			form {
+				@include padding(2em, 2em);
+				width: 55%;
 			}
 		}
 
 		@include breakpoint(small) {
-		 	margin-top: (_size(wrapper-edges, small) * -1);
-		 	padding-top: _size(wrapper-edges, small);
+			padding-top: 7em;
 
-			.inner {
-				@include padding(2em, 2em);
+			> .inner {
+				@include vendor('flex-wrap', 'wrap');
+				width: calc(100% - 3em);
+			}
 
-				form {
-					margin: 0 0 (_size(element-margin) * 1.5) 0;
-				}
+			.contact {
+				width: 100%;
+			}
 
-				.contact {
-					margin: 0 0 (_size(element-margin) * 1.5) 0;
+			form {
+				width: 100%;
+			}
+
+			.copyright {
+				margin-bottom: _size(element-margin);
+
+				li {
+					display: block;
+					border-left: 0;
+					margin-left: 0;
+					padding-left: 0;
 				}
 			}
 		}
 
 		@include breakpoint(xsmall) {
-			.inner {
-				.copyright {
-					li {
-						border-left: 0;
-						display: block;
-						margin: 1em 0 0 0;
-						padding-left: 0;
+			.contact {
+				@include padding(2em, 1.5em);
 
-						&:first-child {
-							margin-top: 0;
-						}
-					}
+				li {
+					padding-left: 2.5em;
 				}
 			}
-		}
 
-		@include breakpoint(xxsmall) {
-			.inner {
+			form {
 				@include padding(2em, 1.5em);
 			}
 		}
